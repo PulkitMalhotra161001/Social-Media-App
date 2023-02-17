@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/addStatus"
+        android:icon="@drawable/add_status"
+        android:title="Add Status"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/group"
+        android:title="Groups" />
+    <item
+        android:id="@+id/invite"
+        android:title="Invite" />
+    <item
+        android:id="@+id/setting"
+        android:title="Settings" />
+    <item
+        android:id="@+id/sing_out"
+        android:title="Sign Out" />
+</menu>
