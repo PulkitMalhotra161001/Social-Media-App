@@ -3,7 +3,7 @@ package com.example.whatsappclone.Models;
 public class User {
     private String uid, name, phoneNumber, profileImage;
 
-    //essential for firebase
+    //while dealing with firebase we need one empty constructor
     public User(){
 
     }

@@ -60,7 +60,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
                                     try {
                                         long time = snapshot.child("lastMsgTime").getValue(Long.class);
                                         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
-                                        Log.d("Pulkit UserAdapter", lastMsg + " " + dateFormat.format(new Date(time)));
+                                        Log.d("PulkitUserAdapter", lastMsg + " " + dateFormat.format(new Date(time)));
                                         holder.binding.time.setText(dateFormat.format(new Date(time)));
                                     }catch (Exception e){
                                         Log.d("Kaithal",e.toString());
@@ -84,6 +84,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UsersViewHolde
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("UserAdapterItemViewClick",user.getName());
                 Intent intent = new Intent(context, ChatActivity.class);
                 intent.putExtra("name",user.getName());
                 intent.putExtra("uid",user.getUid());

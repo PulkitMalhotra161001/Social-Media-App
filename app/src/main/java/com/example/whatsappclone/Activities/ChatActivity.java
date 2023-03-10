@@ -51,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
+        //show messages in recyclerView adapter
         database.getReference().child("chats")
                         .child(senderRoom).child("messages")
                         .addValueEventListener(new ValueEventListener() {
@@ -81,10 +82,13 @@ public class ChatActivity extends AppCompatActivity {
 
                 String randomKey = database.getReference().push().getKey();
 
+                //added message to sender database
                 database.getReference().child("chats").child(senderRoom).child("messages").child(randomKey)
                         .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+
+                                //added message to receiver database
                                 database.getReference().child("chats").child(receiverRoom).child("messages").child(randomKey)
                                         .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -93,11 +97,12 @@ public class ChatActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                //for showing last message in Home Acticity
                                 HashMap<String,Object> lastMsgObj = new HashMap<>();
                                 lastMsgObj.put("lastMsg",message.getMessage());
                                 lastMsgObj.put("lastMsgTime",date.getTime());
 
-                                Log.d("Pulkit ChatAdapter",lastMsgObj.toString());
+                                Log.d("PulkitChatAdapter",lastMsgObj.toString());
 
                                 database.getReference().child("chats").child(senderRoom).updateChildren(lastMsgObj);
                                 database.getReference().child("chats").child(receiverRoom).updateChildren(lastMsgObj);
@@ -108,9 +113,11 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         getSupportActionBar().setTitle(name);
+        //back icon
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    //back functionality
     @Override
     public boolean onSupportNavigateUp() {
         finish();

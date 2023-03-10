@@ -1,6 +1,7 @@
 package com.example.whatsappclone.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -76,17 +77,25 @@ public class MessagesAdapter extends RecyclerView.Adapter{
                 .build();
 
         ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
-            if(holder.getClass()==sendViewHolder.class) {
+            if(holder.getClass()==sendViewHolder.class && pos>=0) {
                 sendViewHolder viewHolder = (sendViewHolder) holder;
+                Log.d("MessageAdapter","sendViewHolder "+"local: "+pos.toString()+" db: "+message.getReaction());
                 viewHolder.binding.reaction.setImageResource(reactions[pos]);
                 viewHolder.binding.reaction.setVisibility(View.VISIBLE);
-            }else{
+            }else if(pos>=0){
                 ReceiverViewHolder viewHolder = (ReceiverViewHolder) holder;
+                Log.d("MessageAdapter","ReceiverViewHolder "+"local: "+pos.toString()+" db: "+message.getReaction());
                 viewHolder.binding.reaction.setImageResource(reactions[pos]);
                 viewHolder.binding.reaction.setVisibility(View.VISIBLE);
             }
 
-            message.setReaction(pos);
+
+            //if same reaction choose then disable it
+            if(message.getReaction()>=0 && message.getReaction()==pos)
+                message.setReaction(-1);
+            else if(pos>=0)
+                message.setReaction(pos);
+
 
             FirebaseDatabase.getInstance()
                         .getReference()

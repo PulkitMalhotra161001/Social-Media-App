@@ -1,14 +1,14 @@
 package com.example.whatsappclone.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsappclone.Models.User;
 import com.example.whatsappclone.databinding.ActivitySetUpProfileBinding;
@@ -68,14 +68,23 @@ public class SetUpProfileActivity extends AppCompatActivity {
 
                 dialog.show();
                 if(selectedImage!=null){
+                    //create a folder inside "Profiles" folder
+                    //file name is "auth.getUid()"
                     StorageReference reference = storage.getReference().child("Profiles").child(auth.getUid());
+
+                    //put image in user folder
+                    //image name is value of "auth.getUid()"
                     reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            //if profile is uploaded successfully to storage
                             if(task.isSuccessful()){
+
+                                //we want URL bcz we want to save into User profile
                                 reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
+                                        // uri -> user profile link
                                         String imageUrl = uri.toString();
 
                                         //how
@@ -84,8 +93,12 @@ public class SetUpProfileActivity extends AppCompatActivity {
 
                                         User user = new User(uid,name,phone,imageUrl);
 
+                                        //add user data into firebase database inside "users" folder
+
                                         database.getReference()
                                                 .child("users").child(uid).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                                    //if user is successfully added and go to next activity
                                                     @Override
                                                     public void onSuccess(Void unused) {
                                                         dialog.dismiss();

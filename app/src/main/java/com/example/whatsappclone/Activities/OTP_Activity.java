@@ -1,13 +1,13 @@
 package com.example.whatsappclone.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsappclone.databinding.ActivityOtpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,6 +76,7 @@ public class OTP_Activity extends AppCompatActivity {
 //                            Toast.makeText(OTP_Activity.this, "Auth Successfully", Toast.LENGTH_SHORT).show();
 //                            dialog.dismiss();
                             startActivity(new Intent(OTP_Activity.this,SetUpProfileActivity.class));
+                            //finish() will finish this activity, finishAffinity finish all previous activities
                             finishAffinity();
                         } else {
                             // Sign in failed, display a message and update the UI
