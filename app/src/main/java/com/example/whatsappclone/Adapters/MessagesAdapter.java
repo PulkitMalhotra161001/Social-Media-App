@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.whatsappclone.Models.Message;
 import com.example.whatsappclone.R;
 import com.example.whatsappclone.databinding.ItemReceiveBinding;
@@ -110,8 +111,18 @@ public class MessagesAdapter extends RecyclerView.Adapter{
             return true; // true is closing popup, false is requesting a new selection
         });
 
+
+        //send view holder
         if(holder.getClass()==sendViewHolder.class){
             sendViewHolder viewHolder = (sendViewHolder) holder;
+
+            //show image if image is send
+            if(message.getMessage().equals("photo")){
+                viewHolder.binding.image.setVisibility(View.VISIBLE);
+                viewHolder.binding.message.setVisibility(View.GONE);
+                Glide.with(context).load(message.getImageUrl()).placeholder(R.drawable.avatar).into(viewHolder.binding.image);
+            }
+
             viewHolder.binding.message.setText(message.getMessage());
 
             if(message.getReaction()>=0){
@@ -129,8 +140,28 @@ public class MessagesAdapter extends RecyclerView.Adapter{
                     return false;
                 }
             });
+
+            viewHolder.binding.image.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    popup.onTouch(view,motionEvent);
+                    return false;
+                }
+            });
+
+
         }else{
+            //receiver view holder
+
             ReceiverViewHolder viewHolder = (ReceiverViewHolder) holder;
+
+            //show image if image is send
+            if(message.getMessage().equals("photo")){
+                viewHolder.binding.image.setVisibility(View.VISIBLE);
+                viewHolder.binding.message.setVisibility(View.GONE);
+                Glide.with(context).load(message.getImageUrl()).placeholder(R.drawable.avatar).into(viewHolder.binding.image);
+            }
+
             viewHolder.binding.message.setText(message.getMessage());
 
             if(message.getReaction()>=0){
@@ -142,6 +173,14 @@ public class MessagesAdapter extends RecyclerView.Adapter{
             }
 
             viewHolder.binding.message.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    popup.onTouch(view,motionEvent);
+                    return false;
+                }
+            });
+
+            viewHolder.binding.image.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     popup.onTouch(view,motionEvent);

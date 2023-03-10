@@ -140,6 +140,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String currentId = FirebaseAuth.getInstance().getUid();
+        database.getReference().child("presence").child(currentId).setValue("Offline");
+    }
+
 
 
     @Override
@@ -149,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"Search Clicked",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.group:
-                Toast.makeText(this,"Group Clicked",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,GroupChatActivity.class));
                 break;
             case R.id.invite:
                 Toast.makeText(this,"Invite Clicked",Toast.LENGTH_SHORT).show();
