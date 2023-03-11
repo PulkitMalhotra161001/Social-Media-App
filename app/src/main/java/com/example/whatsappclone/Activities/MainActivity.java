@@ -2,6 +2,7 @@ package com.example.whatsappclone.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.whatsappclone.Adapters.TopStatusAdapter;
 import com.example.whatsappclone.Adapters.UserAdapter;
 import com.example.whatsappclone.Models.Status;
@@ -22,11 +26,16 @@ import com.example.whatsappclone.Models.User;
 import com.example.whatsappclone.Models.UserStatus;
 import com.example.whatsappclone.R;
 import com.example.whatsappclone.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -48,11 +57,68 @@ public class MainActivity extends AppCompatActivity {
 
     User user;
 
+    //outside app notification
+    //in-app chatting with other person notification
+    //remoteConfig look change
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //remoteConfig -> control app from backEnd and change look and feel like fetival season
+        FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                //tim interval fetch server for updates
+                //0 for debugging and 3600 standard
+                .setMinimumFetchIntervalInSeconds(0)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
+
+        //using this function we change color and activate it
+        mFirebaseRemoteConfig.fetchAndActivate().addOnSuccessListener(new OnSuccessListener<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+
+                String backgroundImage = mFirebaseRemoteConfig.getString("backgroundImage");
+
+                //load image drawable from storage
+//                Glide.with(MainActivity.this)
+//                        .load(backgroundImage)
+//                        .into(binding.backgroundImage);
+
+                /* Toolbar Color */
+                String toolbarColor = mFirebaseRemoteConfig.getString("toolbarColor");
+                String toolBarImage = mFirebaseRemoteConfig.getString("toolbarImage");
+                boolean isToolBarImageEnabled = mFirebaseRemoteConfig.getBoolean("toolBarImageEnabled");
+                //i set it as false in firebase remote Config
+
+
+                if(isToolBarImageEnabled) {
+                    Glide.with(MainActivity.this)
+                            .load(toolBarImage)
+                            .into(new CustomTarget<Drawable>() {
+
+
+                                @Override
+                                public void onResourceReady(@NonNull @NotNull Drawable resource, @Nullable @org.jetbrains.annotations.Nullable Transition<? super Drawable> transition) {
+                                    getSupportActionBar()
+                                            .setBackgroundDrawable(resource);
+                                }
+
+                                @Override
+                                public void onLoadCleared(@Nullable @org.jetbrains.annotations.Nullable Drawable placeholder) {
+
+                                }
+                            });
+                } else {
+//                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(toolbarColor)));
+                }
+
+            }
+        });
+
 
         dialog = new ProgressDialog(this);
         dialog.setMessage("Uploading Image...");
@@ -61,6 +127,22 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         users = new ArrayList<>();
         userStatusArrayList = new ArrayList<>();
+
+        //firebase notification
+        //there are 2 ways to send notification
+        //option 1 -> generate firebase function( it will detect when chat folder is updated then take token from user folder and send notification)
+        //option 2 -> code it with the help of google api (volley(google)/retrofit library for api call)
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String token) {
+                HashMap<String,Object> map=new HashMap<>();
+                map.put("token",token);
+
+                //update user database and add unique token so we can use in the future for notification
+                //make sure app is not open
+                database.getReference().child("users").child(FirebaseAuth.getInstance().getUid()).updateChildren(map);
+            }
+        });
 
         database.getReference().child("users").child(FirebaseAuth.getInstance().getUid()).addValueEventListener(new ValueEventListener() {
             @Override

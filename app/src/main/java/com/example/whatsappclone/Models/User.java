@@ -1,7 +1,7 @@
 package com.example.whatsappclone.Models;
 
 public class User {
-    private String uid, name, phoneNumber, profileImage;
+    private String uid, name, phoneNumber, profileImage, token;
 
     //while dealing with firebase we need one empty constructor
     public User(){
@@ -45,5 +45,13 @@ public class User {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

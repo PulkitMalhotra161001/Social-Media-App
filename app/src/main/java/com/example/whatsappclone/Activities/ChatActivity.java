@@ -9,12 +9,19 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.whatsappclone.Adapters.MessagesAdapter;
 import com.example.whatsappclone.Models.Message;
@@ -32,10 +39,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -69,6 +79,7 @@ public class ChatActivity extends AppCompatActivity {
 
         String name = getIntent().getStringExtra("name");
         String profile = getIntent().getStringExtra("image");
+        String token = getIntent().getStringExtra("token");
 
         binding.name.setText(name);
         Glide.with(ChatActivity.this).load(profile)
@@ -158,11 +169,11 @@ public class ChatActivity extends AppCompatActivity {
                                         .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void unused) {
-
+                                                sendNotification(name,message.getMessage(),token);
                                             }
                                         });
 
-                                //for showing last message in Home Acticity
+                                //for showing last message in Home Activity
                                 HashMap<String,Object> lastMsgObj = new HashMap<>();
                                 lastMsgObj.put("lastMsg",message.getMessage());
                                 lastMsgObj.put("lastMsgTime",date.getTime());
@@ -219,6 +230,55 @@ public class ChatActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //back icon
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    void sendNotification(String name,String message, String token){
+
+        try {
+            //for sending api call using volley we need request queue
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            //it send json data
+            String url = "https://fcm.googleapis.com/fcm/send";
+
+            JSONObject data = new JSONObject();
+            data.put("title", name);
+            data.put("body", message);
+
+            JSONObject notificationData = new JSONObject();
+            notificationData.put("notification", data);
+            //we can send segments also
+            notificationData.put("to", token);
+
+            JsonObjectRequest request = new JsonObjectRequest(url, notificationData,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+//                            Toast.makeText(ChatActivity.this, "success", Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(ChatActivity.this, "sendNotification"+error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }){
+                //fo calling secured api, developers usually provide authorization key
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<>();
+                    String key = "Key=AAAAqe4IYmc:APA91bHouifbSb1CqV-mTJV0Y-HfnCTY0p44Aj1RhVTi8sKRE9I2LfMx-0jIuaZDjuFHCnMt_-ydTgJwOrrL73AQZJjrdU1hBTsW5cy3W4W78Lf9D_vFn3-LmcJltPlCEwtr7Au7wx29";
+                    map.put("Authorization",key);
+                    map.put("Content-Type","application/json");
+                    return map;
+                }
+            };
+
+            queue.add(request);
+
+        }catch(Exception e){
+
+        }
     }
 
     @Override

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         android:id="@+id/RV"
         android:layout_width="match_parent"
