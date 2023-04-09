@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/videocall"
+        android:icon="@drawable/ic_videocall"
+        android:title="Search"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/call"
+        android:icon="@drawable/ic_call"
+        android:title="Add Status"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/viewContact"
+        android:title="View Contact"/>
+    <item
+        android:id="@+id/search"
+        android:title="Search" />
+    <item
+        android:id="@+id/clearChat"
+        android:title="Clear Chat" />
+</menu>

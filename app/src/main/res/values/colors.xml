@@ -9,8 +9,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#323131</color>
 
+    <color name="colorPrimary">#1ECBE1</color>
 
-    <color name="colorPrimary">#0b6156</color>
+    <color name="colorPrimaryDark">  #1ecbe1</color>
 
-    <color name="colorPrimaryDark">  #095049</color>
+    <color name="bg">  #292929</color>
+    <color name="bg2">  #434343</color>
+    <color name="text">  #cdcdcd</color>
+    <color name="stext">  #e6e6e6</color>
+
+
 </resources>

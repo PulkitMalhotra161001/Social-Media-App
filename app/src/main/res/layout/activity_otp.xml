@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F9F9"
+    android:background="@color/bg"
     tools:context=".Activities.OTP_Activity">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Verify +9999999999"
-        android:textColor="@color/black"
+        android:textColor="@color/text"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -36,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
+        android:textColor="@color/stext"
         android:text="Enter the OTP to verify your Phone Number"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf=" @+id/textView2"
@@ -49,6 +50,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/bg2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -66,6 +68,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/textbox_outline"
                 android:ems="10"
+                android:textColor="@color/text"
+                android:textColorHint="@color/text"
                 android:hint="Type your OTP"
                 android:inputType="number"
                 android:padding="15dp" />

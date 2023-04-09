@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ChatActivity"
-    android:background="@drawable/bg">
+    android:background="@color/bg"
+    tools:context=".Activities.ChatActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,7 +16,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -36,7 +36,6 @@
                 android:id="@+id/profile"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:layout_marginLeft="10dp"
                 android:src="@drawable/avatar" />
 
             <LinearLayout
@@ -65,6 +64,24 @@
                     android:visibility="gone" />
             </LinearLayout>
 
+<!--            <ImageView-->
+<!--                android:id="@+id/call"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:tint="@color/white"-->
+<!--                app:srcCompat="@drawable/ic_call" />-->
+<!--            <ImageView-->
+<!--                android:id="@+id/videocall"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_weight="1"-->
+<!--                android:tint="@color/white"-->
+<!--                app:srcCompat="@drawable/ic_videocall" />-->
+
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -84,9 +101,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/bg2">
 
             <ImageView
                 android:id="@+id/emoji"
@@ -94,7 +111,7 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 app:srcCompat="@drawable/ic_emoji_emotions"
-                app:tint="#454242" />
+                app:tint="@color/stext" />
 
             <EditText
                 android:id="@+id/messagebox"
@@ -104,6 +121,8 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:ems="10"
+                android:textColor="@color/text"
+                android:textColorHint="@color/text"
                 android:hint="Message"
                 android:inputType="textPersonName"
                 android:padding="8dp"
@@ -115,7 +134,7 @@
                 android:layout_height="20dp"
                 android:layout_marginRight="10dp"
                 app:srcCompat="@drawable/ic_attachment"
-                app:tint="#454242" />
+                app:tint="@color/stext" />
 
             <ImageView
                 android:id="@+id/camera"
@@ -123,7 +142,7 @@
                 android:layout_height="20dp"
                 android:layout_marginRight="10dp"
                 app:srcCompat="@drawable/ic_camera"
-                app:tint="#454242" />
+                app:tint="@color/stext" />
 
         </LinearLayout>
 
@@ -133,6 +152,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:listitem="@layout/item_receive"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

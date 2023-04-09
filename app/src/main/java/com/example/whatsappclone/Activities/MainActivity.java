@@ -247,23 +247,58 @@ public class MainActivity extends AppCompatActivity {
             case R.id.group:
                 startActivity(new Intent(MainActivity.this,GroupChatActivity.class));
                 break;
+            case R.id.anonymous:
+                Toast.makeText(this,"anonymous Clicked",Toast.LENGTH_SHORT).show();
+                break;
             case R.id.invite:
                 Toast.makeText(this,"Invite Clicked",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.sing_out:
-                Toast.makeText(this,"Sign Out Clicked",Toast.LENGTH_SHORT).show();
+                signOut();
                 break;
             case R.id.setting:
                 Toast.makeText(this,"Settings Clicked",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.addStatus:
-                addStaus();
+                addStatus();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void addStaus() {
+    private void signOut(){
+//        val builder = AlertDialog.Builder(this)
+//        builder.setMessage("Are you sure you want to log out ?")
+//                .setCancelable(false)
+//                .setPositiveButton("Yes") { dialog, id ->
+//
+//                Log.d("SignOutButton", FirebaseAuth.getInstance().currentUser.toString())
+//            FirebaseAuth.getInstance().signOut()
+//
+//            val intent = Intent(this, Splash_Activity::class.java)
+//            startActivity(intent)
+//            finish()
+//
+//            var sharedPreferences: SharedPreferences = getSharedPreferences(PREFS_NAME,0)
+//            var editor: SharedPreferences.Editor = sharedPreferences.edit()
+//            editor.putBoolean("hasLoggedIn",false)
+//            editor.commit()
+//
+//            Toast.makeText(this,"Logout Successfully",Toast.LENGTH_SHORT).show()
+//            Log.d("SignOutButton", FirebaseAuth.getInstance().currentUser.toString())
+//
+//        }
+//
+//                .setNegativeButton("No") { dialog, id ->
+//                // Dismiss the dialog
+//                dialog.dismiss()
+//        }
+//        val alert = builder.create()
+//        alert.show()
+        Toast.makeText(this,"Sign Out Clicked",Toast.LENGTH_SHORT).show();
+    }
+
+    private void addStatus() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);

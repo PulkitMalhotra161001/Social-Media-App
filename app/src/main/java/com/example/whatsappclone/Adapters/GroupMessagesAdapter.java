@@ -106,7 +106,7 @@ public class GroupMessagesAdapter extends RecyclerView.Adapter {
         if(holder.getClass() == SentViewHolder.class) {
             SentViewHolder viewHolder = (SentViewHolder)holder;
 
-            if(message.getMessage().equals("photo")) {
+            if(message.getMessage().equals("Xa%v5vac^v1v^vi*b&mOnqB61v(n}")) {
                 viewHolder.binding.image.setVisibility(View.VISIBLE);
                 viewHolder.binding.message.setVisibility(View.GONE);
                 Glide.with(context)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/bg"
     tools:context=".Activities.GroupChatActivity">
 
     <androidx.cardview.widget.CardView
@@ -23,7 +23,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/bg2">
+
+            <ImageView
+                android:id="@+id/emoji"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/ic_emoji_emotions"
+                app:tint="@color/stext" />
 
             <EditText
                 android:id="@+id/messageBox"
@@ -31,8 +40,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
+                android:textColor="@color/text"
+                android:textColorHint="@color/text"
                 android:background="@android:color/transparent"
-                android:hint="Type a message..."
+                android:hint="Message"
                 android:inputType="textPersonName"
                 android:padding="8dp"
                 android:textSize="14sp" />
@@ -43,7 +54,7 @@
                 android:layout_height="16dp"
                 android:layout_marginRight="12dp"
                 app:srcCompat="@drawable/ic_attachment"
-                app:tint="#676767" />
+                app:tint="@color/stext" />
 
             <ImageView
                 android:id="@+id/camera"
@@ -51,7 +62,7 @@
                 android:layout_height="16dp"
                 android:layout_marginRight="12dp"
                 app:srcCompat="@drawable/ic_camera"
-                app:tint="#676767" />
+                app:tint="@color/stext" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -61,6 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
+        tools:listitem="@layout/item_receive_group"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

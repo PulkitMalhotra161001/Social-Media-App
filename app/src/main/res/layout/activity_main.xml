@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.MainActivity">
+    tools:context=".Activities.MainActivity"
+    android:background="@color/bg">
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -15,6 +16,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+        android:id="@+id/statusList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shimmer_demo_child_count="10"
+        app:shimmer_demo_grid_child_count="2"
+        app:shimmer_demo_layout="@layout/demo_status"
+        app:shimmer_demo_layout_manager_type="linear_horizontal"
+        app:shimmer_demo_angle="20"
+        tools:itemCount="5"/>
 
     <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         android:id="@+id/RV"
@@ -30,20 +45,7 @@
         app:shimmer_demo_grid_child_count="2"
         app:shimmer_demo_layout="@layout/demo_layout"
         app:shimmer_demo_layout_manager_type="linear_vertical"
-        app:shimmer_demo_angle="20"/>
-
-
-    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-        android:id="@+id/statusList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shimmer_demo_child_count="10"
-        app:shimmer_demo_grid_child_count="2"
-        app:shimmer_demo_layout="@layout/demo_status"
-        app:shimmer_demo_layout_manager_type="linear_horizontal"
-        app:shimmer_demo_angle="20"/>
+        app:shimmer_demo_angle="20"
+        tools:itemCount="5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
     <item
         android:id="@+id/search"
@@ -18,7 +19,10 @@
 
     <item
         android:id="@+id/group"
-        android:title="Groups" />
+        android:title="Groups Chat"/>
+    <item
+        android:id="@+id/anonymous"
+        android:title="Anonymous Chat" />
     <item
         android:id="@+id/invite"
         android:title="Invite" />

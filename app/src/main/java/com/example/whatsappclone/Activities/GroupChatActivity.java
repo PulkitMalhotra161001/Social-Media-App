@@ -4,7 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.whatsappclone.Adapters.GroupMessagesAdapter;
 import com.example.whatsappclone.Models.Message;
+import com.example.whatsappclone.R;
 import com.example.whatsappclone.databinding.ActivityGroupChatBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -136,7 +140,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
                                         Date date = new Date();
                                         Message message = new Message(messageTxt, senderUid, date.getTime());
-                                        message.setMessage("photo");
+                                        message.setMessage("Xa%v5vac^v1v^vi*b&mOnqB61v(n}");
                                         message.setImageUrl(filePath);
                                         binding.messageBox.setText("");
 
@@ -159,5 +163,33 @@ public class GroupChatActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.videocall:
+                Toast.makeText(this,"Video call Clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.call:
+                Toast.makeText(this,"Voice call Clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.viewContact:
+                Toast.makeText(this,"View Contact Clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.search:
+                Toast.makeText(this,"Search Clicked",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.clearChat:
+                Toast.makeText(this,"Clear chat Clicked",Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.chattopmenu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

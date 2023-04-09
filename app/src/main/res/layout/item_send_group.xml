@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -19,6 +20,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="User"
             android:layout_margin="5dp"
             android:textSize="12sp"
             android:textStyle="bold" />
