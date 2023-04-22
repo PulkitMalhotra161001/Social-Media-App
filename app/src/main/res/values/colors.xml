@@ -9,14 +9,17 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#323131</color>
 
-    <color name="colorPrimary">#1ECBE1</color>
+    <color name="colorPrimary">#00253b</color>
+    <color name="colorPrimaryDark">#011E30</color>
 
-    <color name="colorPrimaryDark">  #1ecbe1</color>
+    <color name="first">#1ecbe1</color>
+    <color name="second">#00253b</color>
 
     <color name="bg">  #292929</color>
     <color name="bg2">  #434343</color>
     <color name="text">  #cdcdcd</color>
     <color name="stext">  #e6e6e6</color>
+    <color name="btn_state_pressed_color">#75FFFFFF</color>
 
 
 </resources>

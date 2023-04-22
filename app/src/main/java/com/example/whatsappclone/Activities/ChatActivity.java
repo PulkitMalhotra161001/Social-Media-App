@@ -2,9 +2,11 @@ package com.example.whatsappclone.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,6 +31,7 @@ import com.example.whatsappclone.Adapters.MessagesAdapter;
 import com.example.whatsappclone.Models.Message;
 import com.example.whatsappclone.R;
 import com.example.whatsappclone.databinding.ActivityChatBinding;
+import com.example.whatsappclone.dialog.DialogReviewSendImage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -60,6 +63,9 @@ public class ChatActivity extends AppCompatActivity {
 
     ProgressDialog dialog;
     String receiverUid, senderUid;
+    private Uri imageUri;
+    private boolean actionsShown = false;
+    private final int IMAGE_GALLERY_REQUEST = 111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,13 +203,20 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        binding.attachment.setOnClickListener(new View.OnClickListener() {
+        binding.attachment.setOnClickListener(v -> {
+            if (actionsShown) {
+                actionsShown = false;
+                binding.layoutActions.setVisibility(View.GONE);
+            } else {
+                actionsShown = true;
+                binding.layoutActions.setVisibility(View.VISIBLE);
+            }
+        });
+
+        binding.btnGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, 25);
+                openGallery();
             }
         });
 
@@ -239,6 +252,13 @@ public class ChatActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //back icon
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "select image"), IMAGE_GALLERY_REQUEST);
     }
 
     void sendNotification(String name,String message, String token){
@@ -294,72 +314,104 @@ public class ChatActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 25) {
-            if(data != null) {
-                if(data.getData() != null) {
-                    Uri selectedImage = data.getData();
-                    Calendar calendar = Calendar.getInstance();
-                    StorageReference reference = storage.getReference().child("chats").child(calendar.getTimeInMillis() + "");
-                    dialog.show();
+        if (requestCode == IMAGE_GALLERY_REQUEST
+                && resultCode == RESULT_OK
+                && data != null
+                && data.getData() != null) {
+            imageUri = data.getData();
+//            uploadToFirebase();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                reviewImage(bitmap,data);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
-                    reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//        if(requestCode == IMAGE_GALLERY_REQUEST) {
+//            if(data != null) {
+//                if(data.getData() != null) {
+//
+//                }
+//            }
+//        }
+    }
+
+    private void reviewImage(Bitmap bitmap, @Nullable Intent data) {
+        new DialogReviewSendImage(ChatActivity.this, bitmap).show(new DialogReviewSendImage.OnCallBack() {
+            @Override
+            public void OnButtonSendClick() {
+                if (imageUri != null) {
+                    final ProgressDialog progressDialog = new ProgressDialog(ChatActivity.this);
+                    progressDialog.setMessage("Sending..");
+                    progressDialog.show();
+                    binding.layoutActions.setVisibility(View.GONE);
+                    actionsShown = false;
+                    UploadToDataBase(data,progressDialog);
+                }
+            }
+        });
+    }
+
+    private void UploadToDataBase(@Nullable Intent data, ProgressDialog progressDialog) {
+        Uri selectedImage = data.getData();
+        Calendar calendar = Calendar.getInstance();
+        StorageReference reference = storage.getReference().child("chats").child(calendar.getTimeInMillis() + "");
+
+        reference.putFile(selectedImage).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                if(task.isSuccessful()) {
+                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            dialog.dismiss();
-                            if(task.isSuccessful()) {
-                                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        String filePath = uri.toString();
+                        public void onSuccess(Uri uri) {
+                            String filePath = uri.toString();
 
-                                        String messagetxt = binding.messagebox.getText().toString();
-                                        Date date = new Date();
-                                        Message message = new Message(messagetxt,senderUid,date.getTime());
-                                        message.setMessage("Xa%v5vac^v1v^vi*b&mOnqB61v(n}");
-                                        message.setImageUrl(filePath);
-                                        binding.messagebox.setText("");
+                            String messagetxt = binding.messagebox.getText().toString();
+                            Date date = new Date();
+                            Message message = new Message(messagetxt,senderUid,date.getTime());
+                            message.setMessage("Xa%v5vac^v1v^vi*b&mOnqB61v(n}");
+                            message.setImageUrl(filePath);
+                            binding.messagebox.setText("");
 
-                                        String randomKey = database.getReference().push().getKey();
+                            String randomKey = database.getReference().push().getKey();
 
-                                        //for showing last message in Home Acticity
-                                        HashMap<String,Object> lastMsgObj = new HashMap<>();
-                                        lastMsgObj.put("lastMsg",message.getMessage());
-                                        lastMsgObj.put("lastMsgTime",date.getTime());
+                            //for showing last message in Home Acticity
+                            HashMap<String,Object> lastMsgObj = new HashMap<>();
+                            lastMsgObj.put("lastMsg",message.getMessage());
+                            lastMsgObj.put("lastMsgTime",date.getTime());
 
-                                        Log.d("PulkitChatAdapter",lastMsgObj.toString());
+                            Log.d("PulkitChatAdapter",lastMsgObj.toString());
 
-                                        database.getReference().child("chats").child(senderRoom).updateChildren(lastMsgObj);
-                                        database.getReference().child("chats").child(receiverRoom).updateChildren(lastMsgObj);
+                            database.getReference().child("chats").child(senderRoom).updateChildren(lastMsgObj);
+                            database.getReference().child("chats").child(receiverRoom).updateChildren(lastMsgObj);
 
-                                        //added message to sender database
-                                        database.getReference().child("chats").child(senderRoom).child("messages").child(randomKey)
-                                                .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
+                            //added message to sender database
+                            database.getReference().child("chats").child(senderRoom).child("messages").child(randomKey)
+                                    .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
 
-                                                        //added message to receiver database
-                                                        database.getReference().child("chats").child(receiverRoom).child("messages").child(randomKey)
-                                                                .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                    @Override
-                                                                    public void onSuccess(Void unused) {
-
-                                                                    }
-                                                                });
+                                            //added message to receiver database
+                                            database.getReference().child("chats").child(receiverRoom).child("messages").child(randomKey)
+                                                    .setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
+                                                            progressDialog.dismiss();
+                                                        }
+                                                    });
 
 
 
-                                                    }
-                                                });
+                                        }
+                                    });
 
 //                                        Toast.makeText(ChatActivity.this, filePath, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
                         }
                     });
                 }
             }
-        }
+        });
     }
 
     @Override
