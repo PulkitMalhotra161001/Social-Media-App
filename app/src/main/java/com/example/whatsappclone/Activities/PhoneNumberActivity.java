@@ -1,14 +1,14 @@
 package com.example.whatsappclone.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.whatsappclone.databinding.ActivityPhoneNumberBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PhoneNumberActivity extends AppCompatActivity {
 
+    public static boolean PREFS_NAME;
     ActivityPhoneNumberBinding binding;
     FirebaseAuth mAuth;
     ProgressDialog dialog;
@@ -37,6 +38,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mAuth=FirebaseAuth.getInstance();
+        PREFS_NAME=true;
 
         dialog = new ProgressDialog(this);
         dialog.setMessage("Sending OTP");

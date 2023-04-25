@@ -11,19 +11,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/addStatus"
-        android:icon="@drawable/add_status"
-        android:title="Add Status"
-        android:visible="true"
-        app:showAsAction="always" />
-
-    <item
-        android:id="@+id/group"
-        android:title="Groups Chat"/>
-    <item
-        android:id="@+id/anonymous"
-        android:title="Anonymous Chat" />
-    <item
         android:id="@+id/invite"
         android:title="Invite" />
     <item

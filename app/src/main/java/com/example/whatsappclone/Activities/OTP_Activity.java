@@ -22,9 +22,6 @@ public class OTP_Activity extends AppCompatActivity {
 
     ActivityOtpBinding binding;
     FirebaseAuth mAuth;
-    String OTP;
-    PhoneAuthProvider.ForceResendingToken token;
-
     ProgressDialog dialog;
 
     @Override

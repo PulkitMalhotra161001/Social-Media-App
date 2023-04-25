@@ -53,6 +53,12 @@ public class TopStatusAdapter extends RecyclerView.Adapter<TopStatusAdapter.TopS
         Glide.with(context).load(lastStatus.getImageUrl()).into(holder.binding.image);
         holder.binding.circularStatusView.setPortionsCount(userStatus.getStatusArrayList().size());
 
+        String name = userStatus.getName();
+        int maxLength = 8; // maximum length of the text view
+        if (name.length() > maxLength) {
+            name = name.substring(0, maxLength-2) + "..";
+        }
+        holder.binding.name.setText(name);
 
         holder.binding.circularStatusView.setOnClickListener(new View.OnClickListener() {
             @Override

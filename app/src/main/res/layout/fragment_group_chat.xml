@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".Activities.GroupChatActivity">
+    tools:context=".Fragments.GroupChatFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -26,25 +26,17 @@
             android:orientation="horizontal"
             android:background="@color/bg2">
 
-            <ImageView
-                android:id="@+id/emoji"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/ic_emoji_emotions"
-                app:tint="@color/stext" />
-
             <EditText
                 android:id="@+id/messageBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/text"
                 android:textColorHint="@color/text"
                 android:background="@android:color/transparent"
                 android:hint="Message"
-                android:inputType="textPersonName"
+                android:inputType="textShortMessage|textAutoCorrect"
                 android:padding="8dp"
                 android:textSize="14sp" />
 
@@ -52,16 +44,8 @@
                 android:id="@+id/attachment"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="10dp"
                 app:srcCompat="@drawable/ic_attachment"
-                app:tint="@color/stext" />
-
-            <ImageView
-                android:id="@+id/camera"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginRight="12dp"
-                app:srcCompat="@drawable/ic_camera"
                 app:tint="@color/stext" />
 
         </LinearLayout>

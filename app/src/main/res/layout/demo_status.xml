@@ -2,11 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:layout_marginLeft="10dp"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/view6"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
         android:background="@drawable/circle_bg" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginTop="6dp"
+        android:background="#A6A6A6" />
 </LinearLayout>

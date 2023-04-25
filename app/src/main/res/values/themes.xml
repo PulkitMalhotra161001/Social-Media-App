@@ -10,8 +10,10 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/bg</item>
         <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/text</item>
+        <item name="android:textColorHint">@color/text</item>
     </style>
 
     <style name="Theme.WhatsAppClone.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -24,7 +26,9 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/bg</item>
         <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/text</item>
+        <item name="android:textColorHint">@color/text</item>
     </style>
 </resources>

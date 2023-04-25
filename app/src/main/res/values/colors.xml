@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#323131</color>
+    <color name="red">#AF1818</color>
+
 
     <color name="colorPrimary">#00253b</color>
     <color name="colorPrimaryDark">#011E30</color>
@@ -15,11 +17,16 @@
     <color name="first">#1ecbe1</color>
     <color name="second">#00253b</color>
 
-    <color name="bg">  #292929</color>
-    <color name="bg2">  #434343</color>
+    <color name="bg">#151515</color>
+    <color name="bg2">#0D0F0F</color>
     <color name="text">  #cdcdcd</color>
     <color name="stext">  #e6e6e6</color>
     <color name="btn_state_pressed_color">#75FFFFFF</color>
+
+    <color name="back_color">#132530</color>
+    <color name="bot_black_color">#203757</color>
+    <color name="user_back_color">#6965FF</color>
+    <color name="fab_color">#6B6AFF</color>
 
 
 </resources>

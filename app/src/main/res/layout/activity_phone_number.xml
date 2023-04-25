@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:src="@drawable/mobile_auth"
+        android:src="@drawable/phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,64 +22,80 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Verify Your Phone Number"
-        android:textColor="@color/text"
+        android:text="Enter Your Phone Number"
+        android:textColor="@color/first"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
         android:gravity="center"
+        android:text="Hype will send you an SMS message to verify your Phone Number"
         android:textColor="@color/stext"
-        android:text="ChatsApp will send an OTP to verify your Phone Number"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf=" @+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <androidx.cardview.widget.CardView
-        android:backgroundTint="@color/bg2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-        <LinearLayout
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/MIL"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:textColorHighlight="@color/text"
+        android:textColorHint="@color/text"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:counterTextColor="@color/text"
+        android:layout_margin="20dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/text"
+        app:helperText="Required*"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:startIconDrawable="@drawable/ic_call"
+        app:startIconTint="@color/text"
+        app:hintTextColor="@color/text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneET"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="@drawable/textbox_outline"
+            android:ems="10"
+            android:hint="99990-56XXX"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/text"
+            android:textCursorDrawable="@null"
+            android:textColorHint="@color/text"/>
 
-            <EditText
-                android:id="@+id/phoneET"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/textbox_outline"
-                android:ems="10"
-                android:textColor="@color/text"
-                android:textColorHint="@color/text"
-                android:hint="99990-56XXX"
-                android:inputType="number"
-                android:padding="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/continueBT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="send otp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/continueBT"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/send_button_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MIL"
+        app:srcCompat="@drawable/ic_right" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

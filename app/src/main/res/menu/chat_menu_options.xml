@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/aiChat"
+        android:icon="@drawable/ic_ai"
+        android:title="AI"
+        app:cnb_backgroundColor="@color/first"
+        app:cnb_iconColor="@color/second"
+        app:cnb_textColor="@color/second" />
+
+    <item
+        android:id="@+id/anonymousChat"
+        android:icon="@drawable/ic_anonymous"
+        android:title="Anonymous"
+        app:cnb_backgroundColor="@color/first"
+        app:cnb_iconColor="@color/second"
+        app:cnb_textColor="@color/second" />
+
+    <item
+        android:id="@+id/privateChat"
+        android:icon="@drawable/ic_private"
+        android:title="Private"
+        app:cnb_backgroundColor="@color/first"
+        app:cnb_iconColor="@color/second"
+        app:cnb_textColor="@color/second" />
+
+    <item
+        android:id="@+id/groupChat"
+        android:icon="@drawable/ic_group"
+        android:title="Group"
+        app:cnb_backgroundColor="@color/first"
+        app:cnb_iconColor="@color/second"
+        app:cnb_textColor="@color/second" />
+
+    <item
+        android:id="@+id/ephemeralChat"
+        android:icon="@drawable/ic_ephemeral"
+        android:title="Ephemeral"
+        app:cnb_backgroundColor="@color/first"
+        app:cnb_iconColor="@color/second"
+        app:cnb_textColor="@color/second" />
+
+
+
+</menu>
