@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.whatsappclone.Fragments.AIChatFragment;
 import com.example.whatsappclone.Fragments.AnonymousChatFragment;
-import com.example.whatsappclone.Fragments.EphemeralChatFragment;
 import com.example.whatsappclone.Fragments.GroupChatFragment;
 import com.example.whatsappclone.Fragments.PrivateChatFragment;
 
@@ -28,14 +27,14 @@ public class viewPagerAdapter extends FragmentPagerAdapter {
                 return new PrivateChatFragment();
             case 3:
                 return new GroupChatFragment();
-            case 4:
-                return new EphemeralChatFragment();
+//            case 4:
+//                return new EphemeralChatFragment();
         }
         return null;
     }
 
     @Override
     public int getCount() {
-        return 5;
+        return 4;
     }
 }

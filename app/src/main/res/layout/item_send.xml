@@ -11,17 +11,19 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/sent_drawable"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="200dp"
-            android:layout_height="130dp"
-            android:layout_margin="5dp"
-            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:maxWidth="330dp"
+            android:maxHeight="400dp"
+            android:minWidth="280dp"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:visibility="gone"
             app:srcCompat="@drawable/avatar" />
 
@@ -29,6 +31,7 @@
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/sent_drawable"
             android:paddingLeft="15dp"
             android:paddingTop="5dp"
             android:paddingRight="10dp"

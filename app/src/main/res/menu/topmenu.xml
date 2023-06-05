@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_menu_search"
-        android:title="Search"
-        android:visible="true"
-        app:showAsAction="always" />
+<!--    <item-->
+<!--        android:id="@+id/search"-->
+<!--        android:icon="@drawable/ic_menu_search"-->
+<!--        android:title="Search"-->
+<!--        android:visible="true"-->
+<!--        app:showAsAction="always" />-->
 
-    <item
-        android:id="@+id/invite"
-        android:title="Invite" />
-    <item
-        android:id="@+id/setting"
-        android:title="Settings" />
+<!--    <item-->
+<!--        android:id="@+id/invite"-->
+<!--        android:title="Invite" />-->
+<!--    <item-->
+<!--        android:id="@+id/setting"-->
+<!--        android:title="Settings" />-->
     <item
         android:id="@+id/sing_out"
         android:title="Sign Out" />

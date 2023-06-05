@@ -109,19 +109,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.search:
-                Toast.makeText(this, "Search Clicked", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.invite:
-                Toast.makeText(this, "Invite Clicked", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.search:
+//                Toast.makeText(this, "Search Clicked", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.invite:
+//                Toast.makeText(this, "Invite Clicked", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.sing_out:
                 signOut();
                 break;
-            case R.id.setting:
-                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.setting:
+//                Intent intent = new Intent(MainActivity.this, OptionsActivity.class);
+//                startActivity(intent);
+//                break;
         }
         return super.onOptionsItemSelected(item);
     }

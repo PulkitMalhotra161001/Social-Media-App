@@ -34,6 +34,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp"
             app:fabCustomSize="48dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_refresh" />
 
         <!--edit text to enter message-->

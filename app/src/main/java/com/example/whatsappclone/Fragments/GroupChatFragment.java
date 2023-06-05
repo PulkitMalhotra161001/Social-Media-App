@@ -136,7 +136,7 @@ public class GroupChatFragment extends Fragment {
 
                                 Date date = new Date();
                                 Message message = new Message(messageTxt, senderUid, date.getTime());
-                                message.setMessage("Xa%v5vac^v1v^vi*b&mOnqB61v(n}");
+                                message.setMessage("photo");
                                 message.setImageUrl(filePath);
 
                                 EditText messageBox = getView().findViewById(R.id.messageBox);

@@ -370,13 +370,13 @@ public class ChatActivity extends AppCompatActivity {
                             String messagetxt = binding.messagebox.getText().toString();
                             Date date = new Date();
                             Message message = new Message(messagetxt,senderUid,date.getTime());
-                            message.setMessage("Xa%v5vac^v1v^vi*b&mOnqB61v(n}");
+                            message.setMessage("photo");
                             message.setImageUrl(filePath);
                             binding.messagebox.setText("");
 
                             String randomKey = database.getReference().push().getKey();
 
-                            //for showing last message in Home Acticity
+                            //for showing last message in Home Activity
                             HashMap<String,Object> lastMsgObj = new HashMap<>();
                             lastMsgObj.put("lastMsg",message.getMessage());
                             lastMsgObj.put("lastMsgTime",date.getTime());
@@ -417,21 +417,21 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.videocall:
-                Toast.makeText(this,"Video call Clicked",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.call:
-                Toast.makeText(this,"Voice call Clicked",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.viewContact:
-                Toast.makeText(this,"View Contact Clicked",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.search:
-                Toast.makeText(this,"Search Clicked",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.clearChat:
-                Toast.makeText(this,"Clear chat Clicked",Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.videocall:
+//                Toast.makeText(this,"Video call Clicked",Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.call:
+//                Toast.makeText(this,"Voice call Clicked",Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.viewContact:
+//                Toast.makeText(this,"View Contact Clicked",Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.search:
+//                Toast.makeText(this,"Search Clicked",Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.clearChat:
+//                Toast.makeText(this,"Clear chat Clicked",Toast.LENGTH_SHORT).show();
+//                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,10 +1,8 @@
 package com.example.whatsappclone.Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.whatsappclone.Models.Message;
 import com.example.whatsappclone.R;
-import com.example.whatsappclone.databinding.DeleteDialogBinding;
 import com.example.whatsappclone.databinding.ItemReceiveBinding;
 import com.example.whatsappclone.databinding.ItemSendBinding;
 import com.github.pgreze.reactions.ReactionPopup;
@@ -119,7 +116,7 @@ public class MessagesAdapter extends RecyclerView.Adapter{
             sendViewHolder viewHolder = (sendViewHolder) holder;
 
             //show image if image is send
-            if(message.getMessage().equals("Xa%v5vac^v1v^vi*b&mOnqB61v(n}")){
+            if(message.getMessage().equals("photo")){
                 viewHolder.binding.image.setVisibility(View.VISIBLE);
                 viewHolder.binding.message.setVisibility(View.GONE);
                 Glide.with(context).load(message.getImageUrl()).placeholder(R.drawable.avatar).into(viewHolder.binding.image);
@@ -135,63 +132,63 @@ public class MessagesAdapter extends RecyclerView.Adapter{
                 viewHolder.binding.reaction.setVisibility(View.GONE);
             }
 
-            viewHolder.itemView.setOnTouchListener((view, motionEvent) -> {
-                popup.onTouch(view,motionEvent);
-                return false;
-            });
+//            viewHolder.itemView.setOnTouchListener((view, motionEvent) -> {
+//                popup.onTouch(view,motionEvent);
+//                return false;
+//            });
 
-            viewHolder.itemView.setOnLongClickListener(v -> {
-                Log.d("MessageAdapterOnLongClick", String.valueOf(v));
-                View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, null);
-                DeleteDialogBinding binding = DeleteDialogBinding.bind(view);
-                AlertDialog dialog = new AlertDialog.Builder(context)
-                        .setTitle("Delete Message")
-                        .setView(binding.getRoot())
-                        .create();
-
-                binding.everyone.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        message.setMessage("This message is removed.");
-                        message.setReaction(-1);
-                        FirebaseDatabase.getInstance().getReference()
-                                .child("chats")
-                                .child(senderRoom)
-                                .child("messages")
-                                .child(message.getMessageId()).setValue(message);
-
-                        FirebaseDatabase.getInstance().getReference()
-                                .child("chats")
-                                .child(receiverRoom)
-                                .child("messages")
-                                .child(message.getMessageId()).setValue(message);
-                        dialog.dismiss();
-                    }
-                });
-
-                binding.delete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        FirebaseDatabase.getInstance().getReference()
-                                .child("chats")
-                                .child(senderRoom)
-                                .child("messages")
-                                .child(message.getMessageId()).setValue(null);
-                        dialog.dismiss();
-                    }
-                });
-
-                binding.cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-
-                return false;
-            });
+//            viewHolder.itemView.setOnLongClickListener(v -> {
+//                Log.d("MessageAdapterOnLongClick", String.valueOf(v));
+//                View view = LayoutInflater.from(context).inflate(R.layout.delete_dialog, null);
+//                DeleteDialogBinding binding = DeleteDialogBinding.bind(view);
+//                AlertDialog dialog = new AlertDialog.Builder(context)
+//                        .setTitle("Delete Message")
+//                        .setView(binding.getRoot())
+//                        .create();
+//
+//                binding.everyone.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        message.setMessage("This message is removed.");
+//                        message.setReaction(-1);
+//                        FirebaseDatabase.getInstance().getReference()
+//                                .child("chats")
+//                                .child(senderRoom)
+//                                .child("messages")
+//                                .child(message.getMessageId()).setValue(message);
+//
+//                        FirebaseDatabase.getInstance().getReference()
+//                                .child("chats")
+//                                .child(receiverRoom)
+//                                .child("messages")
+//                                .child(message.getMessageId()).setValue(message);
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                binding.delete.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        FirebaseDatabase.getInstance().getReference()
+//                                .child("chats")
+//                                .child(senderRoom)
+//                                .child("messages")
+//                                .child(message.getMessageId()).setValue(null);
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                binding.cancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                dialog.show();
+//
+//                return false;
+//            });
 
 
         }else{
@@ -216,21 +213,21 @@ public class MessagesAdapter extends RecyclerView.Adapter{
                 viewHolder.binding.reaction.setVisibility(View.GONE);
             }
 
-            viewHolder.binding.message.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    popup.onTouch(view,motionEvent);
-                    return false;
-                }
-            });
-
-            viewHolder.binding.image.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    popup.onTouch(view,motionEvent);
-                    return false;
-                }
-            });
+//            viewHolder.binding.message.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent motionEvent) {
+//                    popup.onTouch(view,motionEvent);
+//                    return false;
+//                }
+//            });
+//
+//            viewHolder.binding.image.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View view, MotionEvent motionEvent) {
+//                    popup.onTouch(view,motionEvent);
+//                    return false;
+//                }
+//            });
         }
     }
 
